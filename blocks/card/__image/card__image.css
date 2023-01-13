@@ -1,0 +1,10 @@
+.card__image {
+    width: 100%;
+    object-fit: cover;
+}
+
+@media screen and (max-width: 1024px) {
+    .header {
+      padding-left: 27px;
+    }
+  }

@@ -1,0 +1,9 @@
+.profile__container {
+    display: grid;
+    align-content: center;
+    grid-template-areas: 
+    "name edit"
+    "info info";
+    grid-ROW-gap: 16px;
+    grid-column-gap: 18px;
+}

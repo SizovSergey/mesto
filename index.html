@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <link rel="stylesheet" href="./script/script.js">
+    <title>Проект:место</title>
+</head>
+
+<body class="root">
+    <header class="header">
+        <img src="./images/logo.png" alt="логотип" class="header__logo">
+    </header>
+    <main>
+        <section class="profile">
+            <img src="./images/Avatar.jpg" alt="Жак Ив Кусто" class="profile__avatar">
+            <div class="profile__container">
+                <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+                <p class="profile__user-info">Исследователь океана</p>
+                <button class="profile__edit-button"></button>
+            </div>
+            <button class="profile__add-button"></button>
+        </section>
+        <section class="cards">
+            <div class="card">
+                <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="card__image">
+                <div class="card__content">
+                    <h2 class="card__title">Карачаевск</h2>
+                    <button class="card__button_like"></button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./images/elbrus.jpg" alt="Карачаевск" class="card__image">
+                <div class="card__content">
+                    <h2 class="card__title">Гора Эльбрус</h2>
+                    <button class="card__button_like"></button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./images/Dombai.jpg" alt="Карачаевск" class="card__image">
+                <div class="card__content">
+                    <h2 class="card__title">Домбай</h2>
+                    <button class="card__button_like"></button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./images/elbrus.jpg" alt="Карачаевск" class="card__image">
+                <div class="card__content">
+                    <h2 class="card__title">Гора Эльбрус</h2>
+                    <button class="card__button_like"></button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./images/Dombai.jpg" alt="Карачаевск" class="card__image">
+                <div class="card__content">
+                    <h2 class="card__title">Домбай</h2>
+                    <button class="card__button_like"></button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="card__image">
+                <div class="card__content">
+                    <h2 class="card__title">Карачаево-Черкессия</h2>
+                    <button class="card__button_like"></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <h2 class="footer__title">© 2020 Mesto Russia</h2>
+    </footer>
+    <div class="popup">
+        <div class="popup__container">
+            <h2 class="popup__title">Редактировать профиль</h2>
+            <form class="popup__form" name="popupForm">
+                <input type="text" class="popup__input-name" placeholder="Имя" name="name">
+                <input type="text" class="popup__input-job" placeholder="Профессия" name="job">
+                <button class="popup__save-button" type="submit">Сохранить</button>
+            </form>
+            <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
+        </div>
+    </div>
+    <script src="./script/script.js"></script>
+</body>
+
+</html>
