@@ -4,6 +4,15 @@
     grid-template-areas: 
     "name edit"
     "info info";
-    grid-ROW-gap: 16px;
+    grid-row-gap: 16px;
     grid-column-gap: 18px;
 }
+
+@media screen and (max-width:620px) {
+    .profile__container {
+        padding-bottom: 36px;
+        padding-top: 26px;
+        grid-column-gap: 10px;
+        grid-row-gap: 14px;
+    }
+  }
