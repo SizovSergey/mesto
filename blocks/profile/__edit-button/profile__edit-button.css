@@ -9,13 +9,14 @@
     background-position: center;
     background-repeat: no-repeat;
     cursor: pointer;
-    border:1px solid #fff;
-    opacity: 1;
+    border: 1px solid #fff;
+    cursor: pointer;
+    transition: opacity .2s ease;
 }
 
-.profile__edit-button {
-    opacity: .6;
-  }
+.profile__edit-button:hover {
+    opacity: 0.6;
+}
 
   @media screen and (max-width:620px) {
     .profile__edit-button  {

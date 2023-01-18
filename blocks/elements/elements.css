@@ -1,12 +1,13 @@
-.cards {
+.elements {
     margin: 0 auto;
     max-width: 880px;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min-content,282px));
     grid-template-rows: auto;
     justify-content: center;
-    grid-gap: 20px 17px;
-    padding-top: 47.25px;
+    grid-column-gap: 17px;
+    grid-row-gap: 20px;
+    padding-top: 51px;
 }
 
 @media screen and (max-width:1024px) {

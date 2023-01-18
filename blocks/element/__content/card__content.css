@@ -5,6 +5,8 @@
     max-width: 246px;
     padding-top: 25px;
     padding-bottom: 31px;
+    padding-left: 21px;
+    padding-right: 15px;
     margin: 0 auto;
     display: flex;
 }

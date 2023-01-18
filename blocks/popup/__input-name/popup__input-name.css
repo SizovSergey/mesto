@@ -1,23 +1,13 @@
 .popup__input-name {
-    border: 0; /* Сброс стандартного стиля */
-    border-bottom: 1px solid rgba(0, 0, 0, .2);
-    padding: 10px 0;
-    /* Параметры шрифта внутри поля */
+    border: 0;
+    border-bottom: 1px solid #00000025;
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
     line-height: 1.21;
     color: #000000;
-    margin-bottom: 19px;
-  }
-  
-  .popup__input::placeholder {
-    color: lightgray;
-  }
-  
-  /* Акцент про фокусе на поле */
-  .popup__input:focus {
-    border-bottom-color: #000;
+    padding-bottom: 13px;
     outline: 0;
   }
+  
   

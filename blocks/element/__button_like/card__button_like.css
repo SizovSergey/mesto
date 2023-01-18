@@ -8,9 +8,10 @@
     background-color: #fff;
     background-repeat: no-repeat;
     background-size: contain;
-    transition: opacity .2s;
+    transition: opacity .2s ease ;
+    cursor: pointer;
 }
 
-.card__like-button:hover {
-    opacity: .5;
+.card__button_like:hover {
+    opacity: 0.5;
   }

@@ -1,13 +1,26 @@
 .header__logo {
-    max-width: 142px;
+    width: 142px;
     height: 33px;
-    padding-bottom: 42px;
+    padding-bottom: 41px;
 }
+
+.header__logo:nth-of-type(2) {
+    display: none;
+  }
+
+  .header__logo:hover .header__logo:nth-of-type(1) {
+    display: none;
+  }
+  
+  .header__logo:hover .header__logo:nth-of-type(2) {
+    display: block;
+  }
 
 @media screen and (max-width:620px) {
     .header__logo {
-        width: 104px;
-        height: 25px;
+        width: 103.74px;
+        height: 24.4px;
         padding-bottom: 31.6px;   
     }
 }
+
