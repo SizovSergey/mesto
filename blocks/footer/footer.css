@@ -21,5 +21,6 @@
     .footer {
         width: calc(100% - 38px);
         padding-top: 50px;
+        padding-bottom: 30px;
     }
   }

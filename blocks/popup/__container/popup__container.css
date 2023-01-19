@@ -17,12 +17,13 @@
 }
 
 
-@media screen and (max-width: 620px) {
-    .popup__container {
-        max-width: 282px;
-        padding-top: 25px;
-        padding-left: 22px;
-        padding-right: 22px;
-        padding-bottom: 25px;
-    }
+@media screen and (max-width: 768px) {
+.popup__container {
+    max-width: 282px;
+    padding-top: 25px;
+    padding-left: 22px;
+    padding-right: 22px;
+    padding-bottom: 25px;
+    min-height: 322px;
+}
 }
