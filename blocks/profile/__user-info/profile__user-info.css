@@ -6,7 +6,7 @@
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
-    line-height: 22px;
+    line-height: 1.22;
     color: #FFFFFF;
     margin: 0;
     grid-area: info;
@@ -15,7 +15,8 @@
 @media screen and (max-width:620px) {
     .profile__user-info {
         font-size: 14px;
-        line-height: 17px;
+        line-height: 1.20;
         text-align: center;
+        min-height: 280px;
     }
 }
