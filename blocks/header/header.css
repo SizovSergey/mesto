@@ -7,19 +7,19 @@
 
 @media screen and (max-width:1024px) {
     .header {
-        width: calc(100% - 80px);
+    width: calc(100% - 80px);
     }
 }
 
 @media screen and (max-width:768px) {
     .header {
-        width: calc(100% - 60px);
+    width: calc(100% - 60px);
     }
 }
 
 @media screen and (max-width:620px) {
     .header {
-        width: calc(100% - 38px);
-        padding-top: 28px;
+    width: 100%;
+    padding-top: 28px;
     }
 }
