@@ -10,10 +10,10 @@
 
 @media screen and (max-width:620px) {
     .profile__container {
-        padding-bottom: 36px;
+        padding-bottom: 33px;
         padding-top: 26px;
         grid-column-gap: 10px;
-        grid-row-gap: 14px;
+        grid-row-gap: 7px;
         padding-left: 46px;
         padding-right: 19px;
         grid-template-areas: 
