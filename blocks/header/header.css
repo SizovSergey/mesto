@@ -1,25 +1,25 @@
 .header {
-    max-width: 880px;
-    margin: 0 auto;
-    padding-top: 45px;
-    border-bottom: 1px solid rgba(84,84,84,.7);
+  max-width: 880px;
+  margin: 0 auto;
+  padding-top: 45px;
+  border-bottom: 1px solid rgba(84, 84, 84, .7);
 }
 
 @media screen and (max-width:1024px) {
-    .header {
+  .header {
     width: calc(100% - 80px);
-    }
+  }
 }
 
 @media screen and (max-width:768px) {
-    .header {
+  .header {
     width: calc(100% - 60px);
-    }
+  }
 }
 
 @media screen and (max-width:620px) {
-    .header {
+  .header {
     width: 100%;
     padding-top: 28px;
-    }
+  }
 }

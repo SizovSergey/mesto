@@ -1,18 +1,18 @@
 .element__button-like {
-    min-width: 22px;
-    min-height: 19px;
-    background-image: url('../../../images/Vector\ \(Stroke\).svg');
-    background-position: center;
-    border: none;
-    background-color: #fff;
-    background-repeat: no-repeat;
-    background-size: contain;
-    transition: opacity .2s ease;
-    cursor: pointer;
-    margin-right: 5px;
-    
+  min-width: 22px;
+  min-height: 19px;
+  background-image: url('../../../images/Button__like.svg');
+  background-position: center;
+  border: none;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: opacity .2s ease;
+  cursor: pointer;
+  margin-right: 5px;
+
 }
 
 .element__button-like:hover {
-    opacity: 0.5;
-  }
+  opacity: 0.5;
+}

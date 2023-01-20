@@ -1,10 +1,10 @@
 .profile {
-    max-width: 880px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content) 1fr;
-    grid-gap: 0 30px;
-    padding-top: 36px;
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(min-content, max-content) minmax(min-content, max-content) 1fr;
+  grid-gap: 0 30px;
+  padding-top: 36px;
 }
 
 @media screen and (max-width:1024px) {
