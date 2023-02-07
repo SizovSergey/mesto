@@ -45,10 +45,13 @@ const popupPicture = popupPhoto.querySelector('.popup__image')
 const popupCaption = popupPhoto.querySelector('.popup__caption')
 const popup = document.querySelector('.popup')
 
+const togglePopup = (popup) => {
+  popup.classList.toggle('popup_opened');
+};
 
 
 editButton.addEventListener('click', function () {
-  popupUser.classList.add('popup_opened');
+  togglePopup(popupUser);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 });
@@ -101,10 +104,14 @@ popupFormElement.addEventListener('submit', evt => { //submit для созда�
     link: linkInput.value
   };
   createElements(addElementPhoto); //вызываем функцию создания элемента,как аргумент передаем константу - объект
-  closePopup(popup); // после создания вызываем функцию закрытия попапа
+  togglePopup(popupElement); // после создания вызываем функцию закрытия попапа
 
   placeInput.value = ''; // присваеваем инпутам в попапе значения по умолчанию
   linkInput.value = '';
+});
+
+addButton.addEventListener('click', function () {
+  togglePopup(popupElement);
 });
 
 const openPopupPhoto = () => {
@@ -132,6 +139,5 @@ const exit = Array.from(document.querySelectorAll(".popup__cancel-button")).forE
   }
 );
 
-const togglePopup = (popup) => {
-  popup.classList.toggle('popup_opened');
-};
+
+
