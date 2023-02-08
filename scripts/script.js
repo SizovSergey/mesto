@@ -129,7 +129,7 @@ popupFormUser.addEventListener('submit', function (evt) {  //Сабмит для
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  closePopup(popup);
+ togglePopup(popupUser);
 });
 
 addButton.addEventListener('click', function () { // слушатель для кнопки добавить Место
