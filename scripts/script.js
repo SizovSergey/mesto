@@ -25,119 +25,124 @@ const initialCards = [
   }
 ];
 
-let profileName = document.querySelector('.profile__user-name');
-let profileJob = document.querySelector('.profile__user-info');
-let editButton = document.querySelector('.profile__edit-button');
-let popupUser = document.querySelector('#popup__user');
-let popupElement = document.querySelector('#popup__element');
-let popupFormUser = document.querySelector('#popupForm__user');
-let popupFormElement = document.querySelector('#popupForm__element');
-let nameInput = document.querySelector("input[name='name']");
-let jobInput = document.querySelector("input[name='job']");
-let addButton = document.querySelector('.profile__add-button');
-let saveButton = document.querySelector('.popup__save-button');
-const elements = document.querySelector('.elements');
-const elTemplate = document.querySelector('#element-template').content;
-let placeInput = document.querySelector("input[name='place']");
-let linkInput = document.querySelector("input[name='link']");
+//Попапы
+const popupUser = document.querySelector('#popup__user');
+const popupElement = document.querySelector('#popup__element');
 const popupPhoto = document.querySelector("#popup__photo");
+//Формы попапов
+const popupFormUser = document.querySelector('#popupForm__user');
+const popupFormElement = document.querySelector('#popupForm__element');
+//Btn
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+const saveButton = document.querySelector('.popup__save-button');
+// Инпуты
+const nameInput = document.querySelector("input[name='name']");
+const jobInput = document.querySelector("input[name='job']");
+const placeInput = document.querySelector("input[name='place']");
+const linkInput = document.querySelector("input[name='link']");
+//Контейнер для карт
+const elements = document.querySelector('.elements');
+// Template - жлементы
+const elTemplate = document.querySelector('#element-template').content;
+//Элементы фото попапа
 const popupPicture = popupPhoto.querySelector('.popup__image')
 const popupCaption = popupPhoto.querySelector('.popup__caption')
-const popup = document.querySelector('.popup')
+//Юзер 
+const profileName = document.querySelector('.profile__user-name');
+const profileJob = document.querySelector('.profile__user-info');
+
+
 
 const togglePopup = (popup) => {
   popup.classList.toggle('popup_opened');
+  console.log(popup);
 };
 
+const clickToClosePopup = (evt) => {    
+  const parent = evt.target.closest(".popup_opened")
+  togglePopup(parent);
+};
 
-editButton.addEventListener('click', function () {
+Array.from(document.querySelectorAll(".popup__cancel-button")).forEach(  // получаем Нод лист кнопок закрытия
+  (element) => {
+    element.addEventListener("click", clickToClosePopup);   // прописываем слушатели всем кнопкам закрытия и вызываем функцию закрытия clickToClosePopup
+  }
+);
+
+//  функция клонирование и заполнение элементов
+const createElement = (element) => { 
+  const clone = elTemplate.querySelector('.element').cloneNode(true);
+  const imgClone = clone.querySelector('.element__image');
+  const titleClone = clone.querySelector('.element__title');
+  const btnLikeClone = clone.querySelector('.element__button-like');
+  const btnRemoveClone = clone.querySelector('.element__button-remove');
+  imgClone.src = element.link;
+  imgClone.alt = element.name;
+  titleClone.textContent = element.name;
+
+  btnLikeClone.addEventListener('click', likeElement);
+  btnRemoveClone.addEventListener('click', removeElement);
+
+  imgClone.addEventListener('click', () => openImage(imgClone.src, imgClone.alt, titleClone.textContent));
+
+  return clone;
+}
+
+const renderElement = (data) => {
+  // Создаем карточку на основе данных
+  const element = createElement(data);
+  // Помещаем ее в контейнер карточек
+  elements.prepend(element);
+
+}
+
+const likeElement = (evt) => {
+  evt.target.classList.toggle('element__button-like_active'); // лайк елементов
+}
+
+const removeElement = (evt) => {
+  evt.target.closest('.element').remove(); // удаление элементов
+}
+
+const resetValuePopupElement = () => {
+  placeInput.value = ''; // присваеваем инпутам в попапе с элементами значения по умолчанию
+  linkInput.value = '';
+}
+
+function openImage(src, alt, textContent) { //функция наполнения картинки в попапе для картинки
+  togglePopup(popupPhoto);
+  popupPicture.src = src;
+  popupPicture.alt = alt;
+  popupCaption.textContent = textContent;
+}
+
+initialCards.forEach(element => renderElement(element)); // перебираем катрочки
+
+editButton.addEventListener('click', function () {  // слушатель для кнопки редактирования пользователя
   togglePopup(popupUser);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
 });
 
-
-popupFormUser.addEventListener('submit', function (evt) {
+popupFormUser.addEventListener('submit', function (evt) {  //Сабмит для формы Пользователя
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popup);
 });
 
-
-// 5 спринт
-// клонирование и создание карточки
-const createElements = ({ link, name }) => { //создаем функцию с аргументами link и name
-  const element = elTemplate.querySelector('.element').cloneNode(true);//клонируем template 
-  const elementImg = element.querySelector('.element__image'); //выбираем картинку элемента
-  elementImg.src = link;//присваеваем картинке ссылку из массива элементов
-  elementImg.alt = name;//присваеваем картинке alt (name) из массива элементов
-  const elementTitle = element.querySelector('.element__title');//выбираем название картинки
-  elementTitle.textContent = name; //присваеваем тайтлу элемента название из свойства объекта
-  elements.prepend(element); //вставляем элемент
-
-  const placeLike = element.querySelector('.element__button-like'); //выбираем кнопку лайка элемента
-  placeLike.addEventListener('click', () => { //добавляем слушателя (при клике на кнопку добавиться или удалится класс) element__button-like_active
-    placeLike.classList.toggle('element__button-like_active');
-  });
-
-  const placeRemove = document.querySelector('.element__button-remove'); //выбираем кнопку удаления элемента
-  placeRemove.addEventListener('click', (evt) => { // вешаем слушатель,при клике выполняетс функция
-    evt.target.closest('.element').remove();//находим родителя кнопки и удаляем
-  });
-  
-  elementImg.addEventListener('click', () => openImage(elementImg.src, elementImg.alt, elementTitle.textContent)) //слушатель срабатывает при клике - открывается попап картинки в функцию
-                                                                                                                  // openImage как аргумениты передаются ссылка алт и название
-}
-
-
-const addElements = initialCards.forEach((item, link) => { //перебираем массив и выполняем функцию создания карточки для каждого объекта массива
-  createElements(item, link);
+addButton.addEventListener('click', function () { // слушатель для кнопки добавить Место
+  togglePopup(popupElement);
 });
-
 
 popupFormElement.addEventListener('submit', evt => { //submit для создания нового элемента (через попап)
   evt.preventDefault(); // отмена обновления страницы
-
   const addElementPhoto = {  //создаем константу как элемент 
     name: placeInput.value,
     link: linkInput.value
   };
-  createElements(addElementPhoto); //вызываем функцию создания элемента,как аргумент передаем константу - объект
+  renderElement(addElementPhoto); //вызываем функцию создания элемента,как аргумент передаем константу - объект
   togglePopup(popupElement); // после создания вызываем функцию закрытия попапа
-
-  placeInput.value = ''; // присваеваем инпутам в попапе значения по умолчанию
-  linkInput.value = '';
+  resetValuePopupElement();
 });
-
-addButton.addEventListener('click', function () {
-  togglePopup(popupElement);
-});
-
-const openPopupPhoto = () => {
-  popupPhoto.classList.add('popup_opened');
-};
-
-function openImage(image, alt, caption) { //функция наполнения картинки в попапе для картинки
-  openPopupPhoto();
-  popupPicture.src = image
-  popupPicture.alt = alt
-  popupCaption.textContent = caption
-}
-
-const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');// функция закрытия попапа  - удаляем класс popup_opened из списка классов 
-};
-
-const clickExit = (evt) => {
-  togglePopup(evt.target.closest(".popup"));
-};
-
-const exit = Array.from(document.querySelectorAll(".popup__cancel-button")).forEach(
-  (element) => {
-    element.addEventListener("click", clickExit);
-  }
-);
-
-
-
