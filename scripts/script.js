@@ -46,8 +46,8 @@ const elements = document.querySelector('.elements');
 // Template - жлементы
 const elTemplate = document.querySelector('#element-template').content;
 //Элементы фото попапа
-const popupPicture = popupPhoto.querySelector('.popup__image')
-const popupCaption = popupPhoto.querySelector('.popup__caption')
+const popupPicture = popupPhoto.querySelector('.popup__image');
+const popupCaption = popupPhoto.querySelector('.popup__caption');
 //Юзер 
 const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-info');
@@ -60,7 +60,7 @@ const togglePopup = (popup) => {
 };
 
 const clickToClosePopup = (evt) => {    
-  const parent = evt.target.closest(".popup_opened")
+  const parent = evt.target.closest(".popup_opened");
   togglePopup(parent);
 };
 
@@ -87,7 +87,7 @@ const createElement = (element) => {
   imgClone.addEventListener('click', () => openImage(imgClone.src, imgClone.alt, titleClone.textContent));
 
   return clone;
-}
+};
 
 const renderElement = (data) => {
   // Создаем карточку на основе данных
@@ -95,27 +95,27 @@ const renderElement = (data) => {
   // Помещаем ее в контейнер карточек
   elements.prepend(element);
 
-}
+};
 
 const likeElement = (evt) => {
   evt.target.classList.toggle('element__button-like_active'); // лайк елементов
-}
+};
 
 const removeElement = (evt) => {
   evt.target.closest('.element').remove(); // удаление элементов
-}
+};
 
 const resetValuePopupElement = () => {
   placeInput.value = ''; // присваеваем инпутам в попапе с элементами значения по умолчанию
   linkInput.value = '';
-}
+};
 
 function openImage(src, alt, textContent) { //функция наполнения картинки в попапе для картинки
   togglePopup(popupPhoto);
   popupPicture.src = src;
   popupPicture.alt = alt;
   popupCaption.textContent = textContent;
-}
+};
 
 initialCards.forEach(element => renderElement(element)); // перебираем катрочки
 
