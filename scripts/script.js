@@ -25,8 +25,17 @@ const popupCaption = popupPhoto.querySelector('.popup__caption');
 const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-info');
 
-const togglePopup = (popup) => {
+const onEscKeyDown = (evt) => {
+  if (evt.key === 'Escape' ) {
+    const popup = document.querySelector('.popup_opened');
+    togglePopup(popup);
+    document.removeEventListener('keydown', onEscKeyDown);
+  }
+};
+
+const togglePopup = (popup) => {  
   popup.classList.toggle('popup_opened');
+  document.addEventListener('keydown', onEscKeyDown);
 };
 
 const clickToClosePopup = (evt) => {    
@@ -106,4 +115,4 @@ popupFormElement.addEventListener('submit', evt => { //submit для созда�
   renderElement(addElementPhoto); //вызываем функцию создания элемента,как аргумент передаем константу - объект
   togglePopup(popupElement); // после создания вызываем функцию закрытия попапа
 });
- 
+
