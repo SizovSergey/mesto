@@ -1,15 +1,15 @@
-.popup__input_container {
+.popup__input-container {
   max-width: 238px;
   margin-bottom: 33px;
   position: relative;
 }
 
-.popup__input_container:last-of-type {
+.popup__input-container:last-of-type {
   margin-bottom: 0;
 }
 
 @media screen and (min-width: 768px) {
-  .popup__input_container {
+  .popup__input-container {
     max-width: 358px;
   }
 }
