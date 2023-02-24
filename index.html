@@ -38,12 +38,12 @@
     <div class="popup__container">
       <h3 class="popup__title">Редактировать профиль</h3>
       <form class="popup__form" id="popupForm_edit-profile" novalidate>
-        <label class="popup__input_container">
+        <label for="name" class="popup__input_container">
           <input type="text" class="popup__input" id="name" placeholder="Имя" name="name" minlength="2" maxlength="40"
             required>
           <span id="name-error"></span>
         </label>
-        <label class="popup__input_container">
+        <label for="job" class="popup__input_container">
           <input type="text" class="popup__input" id="job" placeholder="О себе" name="job" minlength="2" maxlength="200"
             required>
           <span id="job-error"></span>
@@ -57,12 +57,12 @@
     <div class="popup__container">
       <h3 class="popup__title">Новое место</h3>
       <form class="popup__form" id="popupForm_add-elements" novalidate>
-        <label class="popup__input_container">
+        <label for="place" class="popup__input_container">
           <input type="text" class="popup__input" id="place" placeholder="Новое место" name="place" minlength="1"
             maxlength="30" required>
           <span id="place-error"></span>
         </label>
-        <label class="popup__input_container">
+        <label for="link" class="popup__input_container">
           <input type="url" class="popup__input" id="link" placeholder="Ссылка на картинку" name="link" required>
           <span id="link-error"></span>
         </label>
