@@ -1,7 +1,6 @@
 .popup__input_container {
   max-width: 238px;
   margin-bottom: 33px;
-  box-size: border-box;
   position: relative;
 }
 
