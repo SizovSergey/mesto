@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
 
 <head>
   <meta charset="UTF-8">
@@ -38,19 +38,17 @@
     <div class="popup__container">
       <h3 class="popup__title">Редактировать профиль</h3>
       <form class="popup__form" id="popupForm_edit-profile" novalidate>
-    
-       
-        <input type="text" class="popup__input" id="name" placeholder="Имя" name="name" minlength="2" maxlength="40"
-          required>
-        <span  id="name-error"></span>
-     
-       
-        <input type="text" class="popup__input" id="job" placeholder="О себе" name="job" minlength="2" maxlength="200"
-          required>
+        <label class="popup__input_container">
+          <input type="text" class="popup__input" id="name" placeholder="Имя" name="name" minlength="2" maxlength="40"
+            required>
+          <span id="name-error"></span>
+        </label>
+        <label class="popup__input_container">
+          <input type="text" class="popup__input" id="job" placeholder="О себе" name="job" minlength="2" maxlength="200"
+            required>
           <span id="job-error"></span>
-     
-        <button class="popup__save-button popup__button_submit" type="submit">Сохранить</button>
-    
+        </label>
+        <button class="popup__button_submit" type="submit">Сохранить</button>
       </form>
       <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
     </div>
@@ -59,18 +57,16 @@
     <div class="popup__container">
       <h3 class="popup__title">Новое место</h3>
       <form class="popup__form" id="popupForm_add-elements" novalidate>
-        
-         
-            <input type="text" class="popup__input" id="place" placeholder="Новое место" name="place" minlength="1"
-              maxlength="30" required>
-            <span  id="place-error"></span>
-       
-
-            <input type="url" class="popup__input" id="link" placeholder="Ссылка на картинку" name="link" required>
-            <span id="link-error"></span>
-        
-          <button class="popup__save-button popup__button_submit" type="submit">Создать</button>
-        
+        <label class="popup__input_container">
+          <input type="text" class="popup__input" id="place" placeholder="Новое место" name="place" minlength="1"
+            maxlength="30" required>
+          <span id="place-error"></span>
+        </label>
+        <label class="popup__input_container">
+          <input type="url" class="popup__input" id="link" placeholder="Ссылка на картинку" name="link" required>
+          <span id="link-error"></span>
+        </label>
+        <button class="popup__button_submit" type="submit">Создать</button>
       </form>
       <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
     </div>

@@ -8,7 +8,6 @@ const popupFormElement = document.querySelector('#popupForm_add-elements');
 //Btn
 const buttonOpenEditProfilePopup = document.querySelector('.profile__edit-button');
 const buttonOpenAddElementPopup = document.querySelector('.profile__add-button');
-const saveButton = document.querySelector('.popup__save-button');
 // Инпуты
 const nameInput = document.querySelector("input[name='name']");
 const jobInput = document.querySelector("input[name='job']");
@@ -16,40 +15,46 @@ const placeInput = document.querySelector("input[name='place']");
 const linkInput = document.querySelector("input[name='link']");
 //Контейнер для карт
 const elements = document.querySelector('.elements');
-// Template - жлементы
+// Template - элементы
 const elTemplate = document.querySelector('#element-template').content;
 //Элементы фото попапа
 const popupPicture = popupPhoto.querySelector('.popup__image');
 const popupCaption = popupPhoto.querySelector('.popup__caption');
-//Юзер 
+//Юзер
 const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-info');
 
-const onEscKeyDown = (evt) => {
-  if (evt.key === 'Escape' ) {
-    const popup = document.querySelector('.popup_opened');
+//закрытие popup по клавиши ESC или кликом на оверлей
+const onEscKeyOrClickForClosePopup = (evt) => {
+  const popup = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
     togglePopup(popup);
-    document.removeEventListener('keydown', onEscKeyDown);
+    document.removeEventListener('keydown', onEscKeyOrClickForClosePopup);
+  }
+  else if (evt.target === evt.currentTarget) {
+    togglePopup(popup);
+    popup.removeEventListener('click', onEscKeyOrClickForClosePopup);
   }
 };
 
-const togglePopup = (popup) => {  
+const togglePopup = (popup) => {
   popup.classList.toggle('popup_opened');
-  document.addEventListener('keydown', onEscKeyDown);
+  document.addEventListener('keydown', onEscKeyOrClickForClosePopup);
+  popup.addEventListener('click', onEscKeyOrClickForClosePopup);
 };
 
-const clickToClosePopup = (evt) => {    
+const clickToClosePopup = (evt) => {
   const parent = evt.target.closest(".popup_opened");
   togglePopup(parent);
 };
 
 const nodeListOfCloseButtons = document.querySelectorAll(".popup__cancel-button"); // получаем Нод лист кнопок закрытия
-nodeListOfCloseButtons.forEach(element => {  
-    element.addEventListener("click", clickToClosePopup);   // прописываем слушатели всем кнопкам закрытия и вызываем функцию закрытия clickToClosePopup
-  });
+nodeListOfCloseButtons.forEach(element => {
+  element.addEventListener("click", clickToClosePopup);   // прописываем слушатели всем кнопкам закрытия и вызываем функцию закрытия clickToClosePopup
+});
 
 //  функция клонирование и заполнение элементов
-const createElement = (element) => { 
+const createElement = (element) => {
   const clone = elTemplate.querySelector('.element').cloneNode(true);
   const imgClone = clone.querySelector('.element__image');
   const titleClone = clone.querySelector('.element__title');
@@ -58,7 +63,7 @@ const createElement = (element) => {
   imgClone.src = element.link;
   imgClone.alt = element.name;
   titleClone.textContent = element.name;
-// слушатели 
+  // слушатели
   btnLikeClone.addEventListener('click', likeElement);
   btnRemoveClone.addEventListener('click', removeElement);
   imgClone.addEventListener('click', () => openImage(imgClone.src, imgClone.alt, titleClone.textContent));
@@ -108,7 +113,7 @@ buttonOpenAddElementPopup.addEventListener('click', function () { // слуша�
 
 popupFormElement.addEventListener('submit', evt => { //submit для создания нового элемента (через попап)
   evt.preventDefault(); // отмена обновления страницы
-  const addElementPhoto = {  //создаем константу как элемент 
+  const addElementPhoto = {  //создаем константу как элемент
     name: placeInput.value,
     link: linkInput.value
   };
