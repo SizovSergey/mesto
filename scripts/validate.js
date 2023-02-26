@@ -1,3 +1,11 @@
+const options = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit-button',
+  inactiveButtonClass: 'popup__button_submit_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_visible'
+};
 
 //Функция показывает сообщение об ошибке
 const showInputError = (formElement, inputElement, errorMessage, { inputErrorClass, errorClass }) => {
@@ -15,6 +23,14 @@ const hideInputError = (formElement, inputElement, { inputErrorClass, errorClass
   errorElement.textContent = '';
 };
 
+//Скрываем сообщения об ошибке при открытие
+const setDefaultErrorState = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(options.inputSelector));
+  inputList.forEach((inputElement) => {
+    hideInputError(formElement, inputElement, options);
+  });
+};
+
 // проверяем есть ли инпуты не прошедшие валидацию
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
@@ -29,6 +45,11 @@ const checkInputValidity = (formElement, inputElement, options) => {
   } else {
     hideInputError(formElement, inputElement, options);
   }
+};
+
+//Дефолтное состояние кнопки при открытие
+const setDefaultButtonState = (buttonElement, inactiveButtonClass) => {
+  buttonElement.classList.add(inactiveButtonClass);
 };
 
 //Функция делает кнопку активной/неактивной, если инпуты прошли/не прошли валидацию
@@ -58,6 +79,8 @@ const enableValidation = ({ formSelector, ...options }) => {
   const formList = Array.from(document.querySelectorAll(formSelector));
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
+      const buttonElement = formElement.querySelector(options.submitButtonSelector);
+      setDefaultButtonState(buttonElement, options.inactiveButtonClass);
       evt.preventDefault();
     });
     setEventListeners(formElement, options);
@@ -65,11 +88,5 @@ const enableValidation = ({ formSelector, ...options }) => {
 };
 
 //Вызов функции enableValidation и передача ей объекта, как аргумента
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__button_submit_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_visible'
-});
+enableValidation(options);
+

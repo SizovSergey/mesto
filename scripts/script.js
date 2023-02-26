@@ -26,18 +26,19 @@ const profileJob = document.querySelector('.profile__user-info');
 
 //закрытие popup по клавиши ESC
 const onEscKeyForClosePopup = (evt) => {
-  const popup = document.querySelector(".popup_opened");
-  if (evt.key === 'Escape') {
-    clickToClosePopup(popup);
+  const popupOpen = document.querySelector(".popup_opened");
+  if (popupOpen && evt.key === 'Escape') {
+    clickToClosePopup(popupOpen);
   }
 };
 //закрытие popup по клику на оверлей
 const onClickForClosePopup = (evt) => {
-  const popup = document.querySelector(".popup_opened");
-  if (evt.target === evt.currentTarget) {
-    clickToClosePopup(popup);
+  const popupOpen = document.querySelector(".popup_opened");
+  if (popupOpen && evt.target === evt.currentTarget) {
+    clickToClosePopup(popupOpen);
   }
 };
+
 //Открыть попап
 const clickToOpenPopup = (popup) => {
   popup.classList.add('popup_opened');
@@ -117,24 +118,9 @@ popupFormUser.addEventListener('submit', function (evt) {  //Сабмит для
   clickToClosePopup(popupUser);
 });
 
-//Дефолтное состояние кнопки при открытие
-const setDefStateSubmitBtn = () => {
-  const buttonElement = popupElement.querySelector('.popup__submit-button');
-  buttonElement.classList.add('popup__button_submit_disabled');
-};
-
-//Скрываем сообщения об ошибке при открытие
-const setDefaultErrorState = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  inputList.forEach((inputElement) => {
-    hideInputError(formElement, inputElement, { inputErrorClass: 'popup__input_type_error', errorClass: 'popup__input-error_visible' });
-  });
-};
-
 buttonOpenAddElementPopup.addEventListener('click', function () { // слушатель для кнопки добавить Место
   clickToOpenPopup(popupElement);
   popupFormElement.reset();
-  setDefStateSubmitBtn();
   setDefaultErrorState(popupFormElement);
 });
 
