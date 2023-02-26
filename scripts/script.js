@@ -26,15 +26,15 @@ const profileJob = document.querySelector('.profile__user-info');
 
 //закрытие popup по клавиши ESC
 const onEscKeyForClosePopup = (evt) => {
-  const popupOpen = document.querySelector(".popup_opened");
-  if (popupOpen && evt.key === 'Escape') {
+  if (evt.key === 'Escape') {
+    const popupOpen = document.querySelector(".popup_opened");
     clickToClosePopup(popupOpen);
   }
 };
 //закрытие popup по клику на оверлей
 const onClickForClosePopup = (evt) => {
-  const popupOpen = document.querySelector(".popup_opened");
-  if (popupOpen && evt.target === evt.currentTarget) {
+  if (evt.target === evt.currentTarget) {
+    const popupOpen = document.querySelector(".popup_opened");
     clickToClosePopup(popupOpen);
   }
 };
@@ -49,7 +49,7 @@ const clickToOpenPopup = (popup) => {
 const clickToClosePopup = (popup) => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', onEscKeyForClosePopup);
-  popup.removeEventListener('click',  onClickForClosePopup);
+  popup.removeEventListener('click', onClickForClosePopup);
 };
 //функция закрытия попапа по клику на кнопку closeBtn
 const clickToCloseButtonToClosePopup = (evt) => {
