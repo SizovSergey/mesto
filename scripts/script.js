@@ -63,47 +63,6 @@ nodeListOfCloseButtons.forEach(element => {
 
 });
 
-//  функция клонирование и заполнение элементов
-const createElement = (element) => {
-  const clone = elTemplate.querySelector('.element').cloneNode(true);
-  const imgClone = clone.querySelector('.element__image');
-  const titleClone = clone.querySelector('.element__title');
-  const btnLikeClone = clone.querySelector('.element__button-like');
-  const btnRemoveClone = clone.querySelector('.element__button-remove');
-  imgClone.src = element.link;
-  imgClone.alt = element.name;
-  titleClone.textContent = element.name;
-  // слушатели
-  btnLikeClone.addEventListener('click', likeElement);
-  btnRemoveClone.addEventListener('click', removeElement);
-  imgClone.addEventListener('click', () => openImage(imgClone.src, imgClone.alt, titleClone.textContent));
-  return clone;
-};
-
-const renderElement = (data) => {
-  // Создаем карточку на основе данных
-  const element = createElement(data);
-  // Помещаем ее в контейнер карточек
-  elements.prepend(element);
-};
-
-const likeElement = (evt) => {
-  evt.target.classList.toggle('element__button-like_active'); // лайк елементов
-};
-
-const removeElement = (evt) => {
-  evt.target.closest('.element').remove(); // удаление элементов
-};
-
-function openImage(src, alt, textContent) { //функция наполнения картинки в попапе для картинки
-  clickToOpenPopup(popupPhoto);
-  popupPicture.src = src;
-  popupPicture.alt = alt;
-  popupCaption.textContent = textContent;
-};
-
-initialCards.forEach(element => renderElement(element)); // перебираем катрочки
-
 buttonOpenEditProfilePopup.addEventListener('click', function () {  // слушатель для кнопки редактирования пользователя
   clickToOpenPopup(popupUser);
   nameInput.value = profileName.textContent;
@@ -130,7 +89,9 @@ popupFormElement.addEventListener('submit', evt => { //submit для созда�
     name: placeInput.value,
     link: linkInput.value
   };
-  renderElement(addElementPhoto); //вызываем функцию создания элемента,как аргумент передаем константу - объект
+  const newElementPhoto = new Card(addElementPhoto, '#element-template');
+  const newcardElement = newElementPhoto.generateCard();
+  elements.prepend(newcardElement); //вызываем функцию создания элемента,как аргумент передаем константу - объект
   clickToClosePopup(popupElement); // после создания вызываем функцию закрытия попапа
 });
 
