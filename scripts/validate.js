@@ -7,6 +7,25 @@ const options = {
   errorClass: 'popup__input-error_visible'
 };
 
+class FormValidator {
+
+  constructor(options, formElement) {
+    this._formElement = formElement;
+    this._formSelector = options.formSelector;
+    this._inputSelector = options.inputSelector;
+    this._submitButtonSelector = options.submitButtonSelector;
+    this._inactiveButtonClass = options.inactiveButtonClass;
+    this._inputErrorClass = options.inputErrorClass;
+    this._errorClass = options.errorClass;
+  }
+  showInputError = (formElement, inputElement, errorMessage, { inputErrorClass, errorClass }) => {
+    inputElement.classList.add(inputErrorClass);
+   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add(errorClass);
+    };
+}
+
 // //Функция показывает сообщение об ошибке
 // const showInputError = (formElement, inputElement, errorMessage, { inputErrorClass, errorClass }) => {
 //   inputElement.classList.add(inputErrorClass);
