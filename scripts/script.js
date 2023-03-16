@@ -67,7 +67,6 @@ buttonOpenEditProfilePopup.addEventListener('click', function () {  // слуш�
   clickToOpenPopup(popupUser);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
-  setDefaultErrorState(popupFormUser);
 });
 
 popupFormUser.addEventListener('submit', function (evt) {  //Сабмит для формы Пользователя
@@ -80,7 +79,6 @@ popupFormUser.addEventListener('submit', function (evt) {  //Сабмит для
 buttonOpenAddElementPopup.addEventListener('click', function () { // слушатель для кнопки добавить Место
   clickToOpenPopup(popupElement);
   popupFormElement.reset();
-  setDefaultErrorState(popupFormElement);
 });
 
 popupFormElement.addEventListener('submit', evt => { //submit для создания нового элемента (через попап)
