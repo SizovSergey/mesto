@@ -91,8 +91,8 @@ popupFormElement.addEventListener('submit', evt => { //submit для созда�
     name: placeInput.value,
     link: linkInput.value
   };
-  const newElementPhoto = new Card(addElementPhoto, '#element-template');
-  const newcardElement = newElementPhoto.generateCard();
+  const newElement = new Card(addElementPhoto, '#element-template', clickToOpenPopup);
+  const newcardElement = newElement.generateCard();
   elements.prepend(newcardElement); //вызываем функцию создания элемента,как аргумент передаем константу - объект
   clickToClosePopup(popupElement); // после создания вызываем функцию закрытия попапа
 });
