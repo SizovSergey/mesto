@@ -1,13 +1,6 @@
-const options = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__submit-button',
-  inactiveButtonClass: 'popup__button_submit_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error_visible'
-};
 
-class FormValidator {
+
+export class FormValidator {
 
   constructor(options, formElement) {
     this._formElement = formElement;
@@ -17,6 +10,7 @@ class FormValidator {
     this._inactiveButtonClass = options.inactiveButtonClass;
     this._inputErrorClass = options.inputErrorClass;
     this._errorClass = options.errorClass;
+
   }
 
   //Функция показывает сообщение об ошибке
@@ -51,6 +45,19 @@ class FormValidator {
     }
   };
 
+  //Дефолтное состояние кнопки при открытие
+  _setDefaultButtonState(buttonElement) {
+    buttonElement.classList.add(this._inactiveButtonClass);
+  };
+  
+  // сброс ошибок формы
+  setDefaultErrorState() {
+    const inputList = Array.from(this._formElement.querySelectorAll(this._inputSelector));
+    inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+    });
+  };
+
   _toggleButtonState(inputList, buttonElement) {
     if (this._hasInvalidInput(inputList)) {
       buttonElement.classList.add(this._inactiveButtonClass);
@@ -76,15 +83,13 @@ class FormValidator {
   enableValidation() {
     this._formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
+      const buttonElement = this._formElement.querySelector(this._submitButtonSelector);
+      this._setDefaultButtonState(buttonElement);
     });
     this._setEventListeners();
   };
 };
 
-document.querySelectorAll('.popup__form').forEach((formItem) => {
-  const validator = new FormValidator(options, formItem);
-  validator.enableValidation();
-});
 
 
 

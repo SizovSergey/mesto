@@ -1,8 +1,13 @@
-class Card {
-    constructor(data, templateSelector) {
+const popupPhoto = document.querySelector("#popup_photo");
+const popupPicture = popupPhoto.querySelector('.popup__image');
+const popupCaption = popupPhoto.querySelector('.popup__caption');
+ 
+ export class Card {
+    constructor(data, templateSelector, clickToOpenPopup) {
         this._templateSelector = templateSelector;
         this._name = data.name;
         this._link = data.link;
+        this._clickToOpenPopup = clickToOpenPopup;
     }
 
     _getTemplate() {
@@ -32,11 +37,11 @@ class Card {
         this._card.remove(); // удаление элементов
     };
 
-    _openPopupPhoto() { //функция наполнения картинки в попапе для картинки
+    _openPopupPhoto() { //функция наполнения фото попапа
         popupPicture.src = this._link;
         popupPicture.alt = this._link;
         popupCaption.textContent = this._name;
-        clickToOpenPopup(popupPhoto);
+        this._clickToOpenPopup(popupPhoto);
     };
 
     _setEventListeners() {
@@ -52,8 +57,3 @@ class Card {
     }
 }
 
-initialCards.forEach((item) => {
-    const cardNew = new Card(item, '#element-template');
-    const cardElement = cardNew.generateCard();
-    elements.prepend(cardElement);
-});
