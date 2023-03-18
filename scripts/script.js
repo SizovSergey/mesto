@@ -23,8 +23,8 @@ const elements = document.querySelector('.elements');
 const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-info');
 //Элементы попапа с увеличенной картинкой
-const photoPopupPicture = popupPhoto.querySelector('.popup__image');
-const photoPopupCaption = popupPhoto.querySelector('.popup__caption');
+const photoPopupPicture = photoPopup.querySelector('.popup__image');
+const photoPopupCaption = photoPopup.querySelector('.popup__caption');
 
 const formValidators = {}
 
