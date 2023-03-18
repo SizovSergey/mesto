@@ -52,10 +52,10 @@ const openPopup = (popup) => {
 
 //Открыть попап с увеличенной картинкой
 const handleCardClick = (name, link) => {
-  popupPicture.src = link;
-  popupPicture.alt = name;
-  popupCaption.textContent = name;
-  openPopup(popupPhoto);
+  photoPopupPicture.src = link;
+  photoPopupPicture.alt = name;
+  photoPopupCaption.textContent = name;
+  openPopup(photoPopup);
 }
 
 //Закрыть попап
