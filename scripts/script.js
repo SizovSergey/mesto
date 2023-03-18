@@ -5,6 +5,7 @@ import { FormValidator } from './FormValidator.js';
 //Попапы
 const userPopup = document.querySelector('#popup_edit-profile');
 const cardPopup = document.querySelector('#popup_add-elements');
+const photoPopup = document.querySelector("#popup_photo");
 //Формы попапов
 const userForm = document.querySelector('#popupForm_edit-profile');
 const cardForm = document.querySelector('#popupForm_add-elements');
@@ -21,6 +22,9 @@ const elements = document.querySelector('.elements');
 //Юзер
 const profileName = document.querySelector('.profile__user-name');
 const profileJob = document.querySelector('.profile__user-info');
+//Элементы попапа с увеличенной картинкой
+const photoPopupPicture = popupPhoto.querySelector('.popup__image');
+const photoPopupCaption = popupPhoto.querySelector('.popup__caption');
 
 const formValidators = {}
 
@@ -28,19 +32,19 @@ const formValidators = {}
 const handleEscape = (evt) => {
   if (evt.key === 'Escape') {
     const popupOpen = document.querySelector(".popup_opened");
-    ClosePopup(popupOpen);
+    closePopup(popupOpen);
   }
 };
 //закрытие popup по клику на оверлей
 const handleOverlay = (evt) => {
   if (evt.target === evt.currentTarget) {
-    ClosePopup(evt.currentTarget);
+    closePopup(evt.currentTarget);
   }
 };
 
 
 //Открыть попап
-const OpenPopup = (popup) => {
+const openPopup = (popup) => {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscape);
   popup.addEventListener('click', handleOverlay);
@@ -48,17 +52,14 @@ const OpenPopup = (popup) => {
 
 //Открыть попап с увеличенной картинкой
 const handleCardClick = (name, link) => {
-  const popupPhoto = document.querySelector("#popup_photo");
-  const popupPicture = popupPhoto.querySelector('.popup__image');
-  const popupCaption = popupPhoto.querySelector('.popup__caption');
   popupPicture.src = link;
   popupPicture.alt = name;
   popupCaption.textContent = name;
-  OpenPopup(popupPhoto);
+  openPopup(popupPhoto);
 }
 
 //Закрыть попап
-const ClosePopup = (popup) => {
+const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', handleEscape);
   popup.removeEventListener('click', handleOverlay);
@@ -67,7 +68,7 @@ const ClosePopup = (popup) => {
 //функция закрытия попапа по клику на кнопку closeBtn
 const clickToCloseButtonToClosePopup = (evt) => {
   const parent = evt.target.closest(".popup_opened");
-  ClosePopup(parent);
+  closePopup(parent);
 };
 
 const nodeListOfCloseButtons = document.querySelectorAll(".popup__cancel-button"); // получаем Нод лист кнопок закрытия
@@ -76,7 +77,7 @@ nodeListOfCloseButtons.forEach(element => {
 });
 
 userPopupOpenButton.addEventListener('click', function () {  // слушатель для кнопки редактирования пользователя
-  OpenPopup(userPopup);
+  openPopup(userPopup);
   nameInput.value = profileName.textContent;
   jobInput.value = profileJob.textContent;
   formValidators[userForm.getAttribute('id')].resetValidation()
@@ -86,11 +87,11 @@ userForm.addEventListener('submit', function (evt) {  //Сабмит для фо
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
-  ClosePopup(userPopup);
+  closePopup(userPopup);
 });
 
 cardPopupOpenButton.addEventListener('click', function () { // слушатель для кнопки добавить Место
-  OpenPopup(cardPopup);
+  openPopup(cardPopup);
   cardForm.reset();
   // validatorFormElement.resetValidation();
   formValidators[cardForm.getAttribute('id')].resetValidation()
@@ -103,7 +104,7 @@ cardForm.addEventListener('submit', evt => { //submit для создания н
     link: linkInput.value
   };
   insertCard(createCard(addElementPhoto));
-  ClosePopup(cardPopup); // после создания вызываем функцию закрытия попапа
+  closePopup(cardPopup); // после создания вызываем функцию закрытия попапа
 });
 
 // Создание новой карточки
