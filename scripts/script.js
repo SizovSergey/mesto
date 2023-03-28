@@ -1,32 +1,7 @@
-import { initialCards, options } from './constans.js';
-import { Card } from './Card.js';
-import { FormValidator } from './FormValidator.js';
-
-//Попапы
-const userPopup = document.querySelector('#popup_edit-profile');
-const cardPopup = document.querySelector('#popup_add-elements');
-const photoPopup = document.querySelector("#popup_photo");
-//Формы попапов
-const userForm = document.querySelector('#popupForm_edit-profile');
-const cardForm = document.querySelector('#popupForm_add-elements');
-//Btn
-const userPopupOpenButton = document.querySelector('.profile__edit-button');
-const cardPopupOpenButton = document.querySelector('.profile__add-button');
-// Инпуты
-const nameInput = document.querySelector("input[name='name']");
-const jobInput = document.querySelector("input[name='job']");
-const placeInput = document.querySelector("input[name='place']");
-const linkInput = document.querySelector("input[name='link']");
-//Контейнер для карт
-const elements = document.querySelector('.elements');
-//Юзер
-const profileName = document.querySelector('.profile__user-name');
-const profileJob = document.querySelector('.profile__user-info');
-//Элементы попапа с увеличенной картинкой
-const photoPopupPicture = photoPopup.querySelector('.popup__image');
-const photoPopupCaption = photoPopup.querySelector('.popup__caption');
-
-const formValidators = {}
+import { options, initialCards, userPopup, cardPopup, photoPopup, userForm, cardForm, userPopupOpenButton, cardPopupOpenButton, nameInput, jobInput, placeInput, linkInput, elements, profileName, profileJob, photoPopupPicture, photoPopupCaption, formValidators} from '../utils/constans.js';
+import  Card  from './Card.js'
+import  FormValidator  from './FormValidator.js';
+import  Section  from './Section.js';
 
 //закрытие popup по клавиши ESC
 const handleEscape = (evt) => {
@@ -41,7 +16,6 @@ const handleOverlay = (evt) => {
     closePopup(evt.currentTarget);
   }
 };
-
 
 //Открыть попап
 const openPopup = (popup) => {
@@ -103,37 +77,34 @@ cardForm.addEventListener('submit', evt => { //submit для создания н
     name: placeInput.value,
     link: linkInput.value
   };
-  insertCard(createCard(addElementPhoto));
+
   closePopup(cardPopup); // после создания вызываем функцию закрытия попапа
 });
 
-// Создание новой карточки
-const createCard = (item) => {
-  const newCard = new Card(item, '#element-template', handleCardClick);
-  const card = newCard.generateCard();
-  return card;
-}
 
-// Вставка карточки
-const insertCard = (cardItem) => {
-  elements.prepend(cardItem);
-};
+const cards = new Section({ items: initialCards,
+  renderer: (item) => {
+  const card = new Card(item, '#element-template', handleCardClick);
+        const cardElement = card.generateCard();
+        cards.addItem(cardElement);
+   }
+  },".elements");
 
-//Рендерим карточки
-initialCards.forEach((carditem) => {
-  const cardElement = createCard(carditem);
-  insertCard(cardElement);
-});
+  cards.renderItems();
 
 // Включение валидации
 const enableValidation = (options) => {
   const formList = Array.from(document.querySelectorAll(options.formSelector))
   formList.forEach((formElement) => {
     const validator = new FormValidator(options, formElement)
-    const formid = formElement.getAttribute('id')
-    formValidators[formid] = validator;
+    const formId = formElement.getAttribute('id')
+    formValidators[formId] = validator;
     validator.enableValidation();
   });
 };
 
+
 enableValidation(options);
+
+
+

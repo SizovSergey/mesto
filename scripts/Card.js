@@ -1,4 +1,4 @@
-export class Card {
+export default class Card {
     constructor(data, templateSelector, handleCardClick) {
         this._templateSelector = templateSelector;
         this._name = data.name;
@@ -12,7 +12,6 @@ export class Card {
             .content
             .querySelector('.element')
             .cloneNode(true);
-
         return cardElement;
     }
 
@@ -35,6 +34,7 @@ export class Card {
 
     _removeElement = () => {
         this._card.remove(); // удаление элементов
+        this._card = null;
     };
 
     _setEventListeners() {
