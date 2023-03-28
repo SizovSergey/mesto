@@ -21,20 +21,3 @@ export default class Section {
 }
 
 
-// // Создание новой карточки
-// const createCard = (item) => {
-//     const newCard = new Card(item, '#element-template', handleCardClick);
-//     const card = newCard.generateCard();
-//     return card;
-//   }
-
-//   // Вставка карточки
-//   const insertCard = (cardItem) => {
-//     elements.prepend(cardItem);
-//   };
-
-//   //Рендерим карточки
-//   initialCards.forEach((carditem) => {
-//     const cardElement = createCard(carditem);
-//     insertCard(cardElement);
-//   });

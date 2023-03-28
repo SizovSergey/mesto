@@ -3,27 +3,6 @@ import  Card  from './Card.js'
 import  FormValidator  from './FormValidator.js';
 import  Section  from './Section.js';
 
-//закрытие popup по клавиши ESC
-const handleEscape = (evt) => {
-  if (evt.key === 'Escape') {
-    const popupOpen = document.querySelector(".popup_opened");
-    closePopup(popupOpen);
-  }
-};
-//закрытие popup по клику на оверлей
-const handleOverlay = (evt) => {
-  if (evt.target === evt.currentTarget) {
-    closePopup(evt.currentTarget);
-  }
-};
-
-//Открыть попап
-const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', handleEscape);
-  popup.addEventListener('click', handleOverlay);
-}
-
 //Открыть попап с увеличенной картинкой
 const handleCardClick = (name, link) => {
   photoPopupPicture.src = link;
@@ -31,14 +10,6 @@ const handleCardClick = (name, link) => {
   photoPopupCaption.textContent = name;
   openPopup(photoPopup);
 }
-
-//Закрыть попап
-const closePopup = (popup) => {
-  popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', handleEscape);
-  popup.removeEventListener('click', handleOverlay);
-};
-
 //функция закрытия попапа по клику на кнопку closeBtn
 const clickToCloseButtonToClosePopup = (evt) => {
   const parent = evt.target.closest(".popup_opened");
