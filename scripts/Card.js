@@ -37,9 +37,7 @@ export default class Card {
         this._card = null;
     }
 
-    _openPopup() {
-        this._handleCardClick(this._name, this._link);
-    }
+  
 
     _setEventListeners() {
         this._cardBtnLike.addEventListener('click', () => {
@@ -49,10 +47,7 @@ export default class Card {
             this._removeElement();
         });
         this._cardImage.addEventListener('click', () => {
-            this._openPopup();
-        });
-        this._card.addEventListener('click', () => {
-            this._openPopup();
-        });
-    }
+            this._handleCardClick(this._name, this._link);
+          });
+}
 }

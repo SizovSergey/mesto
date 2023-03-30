@@ -7,13 +7,14 @@ import PopupWithImage from './PopupWithImage.js';
 import UserInfo from './UserInfo.js';
 
 const popupWithImage = new PopupWithImage('#popup_photo');
+const userInfo = new UserInfo('#name', '#job');
 
 const cards = new Section({ items: initialCards,//создание нового экземпляра section,который будет вставлять карточки
   renderer: (item) => {//колбэк где описываем как создавать карточки
   const card = new Card({
     data: item,
-    handleCardClick: (item) => {
-      popupWithImage.open(item);
+    handleCardClick: (name,link) => {
+      popupWithImage.open(name,link);
     }
   },
     '#element-template');
@@ -24,17 +25,19 @@ const cards = new Section({ items: initialCards,//создание нового 
 
   cards.renderItems(); //вставка карточек
 
-  const userInfo = new UserInfo({
-    nameSelector: '#name',
-    jobSelector:'#job'});
-  
-  const popupWithUSer = new PopupWithForm('#popup_edit-profile',{
-    submitFormCallback: ({nameUser,job}) => {
-      userInfo({nameUser,job});
-      popupWithUSer.close();
+  const popupWithUser = new PopupWithForm('#popup_edit-profile', {
+    submitFormCallback: (data) => {
+      userInfo.setUserInfo(data);
+      popupWithUser.close();
     }
-  })
+  });
   
+  popupWithUser.setEventListeners();
+
+  //Открыть userPopup
+  userPopupOpenButton.addEventListener('click', () => {
+    popupWithUser.open();
+});
 
   
 
