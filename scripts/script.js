@@ -7,7 +7,8 @@ import PopupWithImage from './PopupWithImage.js';
 import UserInfo from './UserInfo.js';
 
 const popupWithImage = new PopupWithImage('#popup_photo');
-const userInfo = new UserInfo('#name', '#job');
+const userInfo = new UserInfo('.profile__user-name', '.profile__user-info');
+
 
 const cards = new Section({ items: initialCards,//создание нового экземпляра section,который будет вставлять карточки
   renderer: (item) => {//колбэк где описываем как создавать карточки
@@ -25,22 +26,56 @@ const cards = new Section({ items: initialCards,//создание нового 
 
   cards.renderItems(); //вставка карточек
 
+
+
   const popupWithUser = new PopupWithForm('#popup_edit-profile', {
     submitFormCallback: (data) => {
       userInfo.setUserInfo(data);
-      popupWithUser.close();
+    },
+    setInputValues: () => {
+    nameInput.value = userInfo.getUserInfo().name;
+    jobInput.value = userInfo.getUserInfo().job;
     }
   });
-  
-  popupWithUser.setEventListeners();
+
 
   //Открыть userPopup
   userPopupOpenButton.addEventListener('click', () => {
     popupWithUser.open();
+    formValidators[userForm.getAttribute('id')].resetValidation()
 });
 
-  
+const popupWitCard = new PopupWithForm('#popup_add-elements',{
+  submitFormCallback: (item) => {
+    const insertNewUserCard = new Section({
+      data: [item],
+      renderer: (item) => {
+        const card = new Card({
+          data: item,
+          handleCardClick: (name,link) => {
+            popupWithImage.open(name,link);
+          }
+        },
+          '#element-template');
+              const cardElement = card.generateCard();
+              insertNewUserCard.addItem(cardElement);
+              console.log(cardElement);
+         }
+        },".elements");
+        insertNewUserCard.renderItems();
+        popupWitCard.close();
+      },
+      setInputValues: () =>{
+      popupWitCard.close
+    }
+  }
+ )
 
+
+    cardPopupOpenButton.addEventListener('click',  () => { // слушатель для кнопки добавить Место
+      popupWitCard.open();
+        formValidators[cardForm.getAttribute('id')].resetValidation()
+      });
 
 
 
