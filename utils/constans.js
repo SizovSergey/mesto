@@ -34,11 +34,6 @@ export const options = {
     errorClass: 'popup__input-error_visible'
 };
 
-
-//Попапы
-export const userPopup = document.querySelector('#popup_edit-profile');
-export const cardPopup = document.querySelector('#popup_add-elements');
-export const photoPopup = document.querySelector("#popup_photo");
 //Формы попапов
 export const userForm = document.querySelector('#popupForm_edit-profile');
 export const cardForm = document.querySelector('#popupForm_add-elements');
@@ -51,12 +46,5 @@ export const jobInput = document.querySelector("input[name='job']");
 export const placeInput = document.querySelector("input[name='place']");
 export const linkInput = document.querySelector("input[name='link']");
 //Контейнер для карт
-export const elements = document.querySelector('.elements');
-//Юзер
-export const profileName = document.querySelector('.profile__user-name');
-export const profileJob = document.querySelector('.profile__user-info');
-//Элементы попапа с увеличенной картинкой
-export const photoPopupPicture = photoPopup.querySelector('.popup__image');
-export const photoPopupCaption = photoPopup.querySelector('.popup__caption');
 export const formValidators = {}
 
