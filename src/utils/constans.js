@@ -43,8 +43,6 @@ export const cardPopupOpenButton = document.querySelector('.profile__add-button'
 // Инпуты
 export const nameInput = document.querySelector("input[name='name']");
 export const jobInput = document.querySelector("input[name='job']");
-export const placeInput = document.querySelector("input[name='place']");
-export const linkInput = document.querySelector("input[name='link']");
-//Контейнер для карт
+
 export const formValidators = {}
 
