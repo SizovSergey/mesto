@@ -2,7 +2,7 @@
   "name": "mesto",
   "version": "1.0.0",
   "description": "проект место.Выполнение 8 практической работы",
-  "main": "scripts.js",
+  "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve"
