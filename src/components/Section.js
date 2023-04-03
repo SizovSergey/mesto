@@ -9,12 +9,7 @@ export default class Section {
     this._container.prepend(element);
   }
 
-  _close() {
-    this._container.innerHTML = '';
-  }
-
   renderItems() {
-    this._close()
     this._items.forEach((item) => {
       this._renderer(item)
     })

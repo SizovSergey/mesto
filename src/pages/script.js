@@ -1,14 +1,16 @@
 import { options, initialCards, userForm, cardForm, userPopupOpenButton, cardPopupOpenButton, nameInput, jobInput,  formValidators } from '../utils/constans.js';
-import Card from '../scripts/Card.js'
-import FormValidator from '../scripts/FormValidator.js';
-import Section from '../scripts/Section.js';
-import PopupWithForm from '../scripts/PopupWithForm.js';
-import PopupWithImage from '../scripts/PopupWithImage.js';
-import UserInfo from '../scripts/UserInfo.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import Card from '../components/Card.js';
+import FormValidator from '../components/FormValidator.js';
+import Section from '../components/Section.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import UserInfo from '../components/UserInfo.js';
+import { createCard } from'../utils/utils.js';
 import './index.css';
 
-//Создаем экземпляр класса PopupWithImage
+// Создаем экземпляр класса PopupWithImage
 const popupWithImage = new PopupWithImage('#popup_photo');
+popupWithImage.setEventListeners();
 
 //Создаем экземпляр класса UserInfo
 const userInfo = new UserInfo('.profile__user-name', '.profile__user-info');
@@ -17,15 +19,7 @@ const userInfo = new UserInfo('.profile__user-name', '.profile__user-info');
 const cards = new Section({
   items: initialCards,//создание нового экземпляра section ,который будет вставлять карточки
   renderer: (item) => {//колбэк где описываем как создавать карточки
-    const card = new Card({
-      name: item.name,
-      link: item.link,
-      handleCardClick: (name, link) => {
-        popupWithImage.open(name, link);
-      }
-    },
-      '#element-template');
-    const cardElement = card.generateCard();
+    const cardElement = createCard(item.name,item.link,popupWithImage);
     cards.addItem(cardElement);
   }
 }, ".elements");
@@ -40,21 +34,20 @@ const popupWithUser = new PopupWithForm('#popup_edit-profile', {
   }
 });
 
+//вызов setEventListeners для формы для редактирования данных пользователя
+popupWithUser.setEventListeners();
+
 //Создаем экземпляр класса PopupWithForm для формы добавления новых карточек
 const popupWitCard = new PopupWithForm('#popup_add-elements', {
   submitFormCallback: (item) => {
-    const userCard = new Card({
-      name: item.place,
-      link: item.link,
-      handleCardClick: (name, link) => {
-        popupWithImage.open(name, link);
-      }
-    }, '#element-template');
-    const cardElement = userCard.generateCard();
+    const cardElement = createCard(item.place,item.link,popupWithImage);
     cards.addItem(cardElement);
     popupWitCard.close();
   }
-})
+});
+
+//вызов setEventListeners для формы добавления новых карточек
+popupWitCard.setEventListeners();
 
 // Включение валидации
 const enableValidation = (options) => {
@@ -82,3 +75,5 @@ cardPopupOpenButton.addEventListener('click', () => {
   popupWitCard.open();
   formValidators[cardForm.getAttribute('id')].resetValidation()
 });
+
+
