@@ -1,12 +1,31 @@
-import { options, initialCards, userForm, cardForm, userPopupOpenButton, cardPopupOpenButton, nameInput, jobInput,  formValidators } from '../utils/constans.js';
+import { options, userForm, cardForm, userPopupOpenButton, cardPopupOpenButton, nameInput, jobInput, formValidators } from '../utils/constans.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js';
-import { createCard } from'../utils/utils.js';
+import { createCard } from '../utils/utils.js';
+import { api } from '../components/Api.js';
 import './index.css';
+let cards
+
+Promise.all([api.getUserinfo(), api.getInitialCards()])
+  .then(([userData, cardsData]) => {
+    let userId;
+    userId = userData._id;
+    userInfo.setUserInfo(userData.name, userData.about)
+
+
+    cards = new Section({
+      items: cardsData,
+      renderer: (item) => {
+        const cardElement = createCard(item.name, item.link, item.owner._id, userId, item.likes, item._id, popupWithImage);
+        cards.addItem(cardElement);
+      }
+    }, ".elements");
+    cards.renderItems();
+  })
 
 // Создаем экземпляр класса PopupWithImage
 const popupWithImage = new PopupWithImage('#popup_photo');
@@ -15,22 +34,25 @@ popupWithImage.setEventListeners();
 //Создаем экземпляр класса UserInfo
 const userInfo = new UserInfo('.profile__user-name', '.profile__user-info');
 
-//Создаем экземпляр класса Section,где в функции колбэке render создаем экземпляр класса Card для каждой карточки
-const cards = new Section({
-  items: initialCards,//создание нового экземпляра section ,который будет вставлять карточки
-  renderer: (item) => {//колбэк где описываем как создавать карточки
-    const cardElement = createCard(item.name,item.link,popupWithImage);
-    cards.addItem(cardElement);
-  }
-}, ".elements");
+// //Создаем экземпляр класса Section,где в функции колбэке render создаем экземпляр класса Card для каждой карточки
+// const cards = new Section({
+//   items: initialCards,//создание нового экземпляра section ,который будет вставлять карточки
+//   renderer: (item) => {//колбэк где описываем как создавать карточки
+//     const cardElement = createCard(item.name,item.link,popupWithImage);
+//     cards.addItem(cardElement);
+//   }
+// }, ".elements");
 
-//вставка карточек
-cards.renderItems();
+// //вставка карточек
+// cards.renderItems();
 
 //Создаем экземпляр класса PopupWithForm для редактирования данных пользователя
 const popupWithUser = new PopupWithForm('#popup_edit-profile', {
   submitFormCallback: (data) => {
-    userInfo.setUserInfo(data);
+    api.editProfile(data.name, data.job)
+      .then((res) => {
+        userInfo.setUserInfo(res.name, res.about);
+      })
   }
 });
 
@@ -40,8 +62,12 @@ popupWithUser.setEventListeners();
 //Создаем экземпляр класса PopupWithForm для формы добавления новых карточек
 const popupWitCard = new PopupWithForm('#popup_add-elements', {
   submitFormCallback: (item) => {
-    const cardElement = createCard(item.place,item.link,popupWithImage);
-    cards.addItem(cardElement);
+    console.log(item)
+    api.insertNewCard(item.place, item.link)
+      .then(res => {
+        const cardElement = createCard(res.name, res.link, popupWithImage);
+        cards.addItem(cardElement);
+      })
     popupWitCard.close();
   }
 });
@@ -75,5 +101,7 @@ cardPopupOpenButton.addEventListener('click', () => {
   popupWitCard.open();
   formValidators[cardForm.getAttribute('id')].resetValidation()
 });
+
+
 
 

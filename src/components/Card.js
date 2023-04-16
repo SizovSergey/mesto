@@ -1,9 +1,13 @@
 export default class Card {
-  constructor({ name, link, handleCardClick }, templateSelector) {
-    this._templateSelector = templateSelector;
+  constructor({ name, link, ownerId, userId, like, cardId, handleCardClick }, templateSelector) {
     this._name = name;
     this._link = link;
+    this.ownerId = ownerId;
+    this.userId = userId;
+    this.like = like;
+    this.cardId = cardId;
     this._handleCardClick = handleCardClick;
+    this._templateSelector = templateSelector;
   }
 
   _getTemplate() {
@@ -25,6 +29,9 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardTitle.textContent = this._name;
+    if (this.ownerId !== this.userId){
+      this._cardBtnRemove.style.display = 'none';
+    }
     return this._card;
   }
 

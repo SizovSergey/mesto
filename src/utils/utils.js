@@ -1,19 +1,19 @@
 import Card from '../components/Card.js';
 
 
- const createCard = (firstParameter,secondParameter,popupWithImage) =>{  
-    const card = new Card({
-    name: firstParameter,
-    link: secondParameter,
+const createCard = (name, link, popupWithImage) => {
+  const card = new Card({
+    name: name,
+    link: link,
     handleCardClick: (name, link) => {
-        popupWithImage.open(name, link);
+      popupWithImage.open(name, link);
     }
   }, '#element-template');
   const cardElement = card.generateCard();
   return cardElement;
-  }
-
-  export { createCard };
+}
 
 
-  
+export { createCard };
+
+
