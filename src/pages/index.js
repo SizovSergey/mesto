@@ -74,9 +74,9 @@ confirmPopup.setEventListeners();
 
 const editUserAvatarPopup = new PopupWithForm('#popup_edit-userAvatar', {
   submitFormCallback: (item) => {
-    console.log(item)
    api.editAvatar(item.link)
    .then(res => {
+    console.log(item.link)
     userInfo.setAvataruser(res.avatar)
     editUserAvatarPopup.close()
    })
