@@ -1,4 +1,4 @@
-import { options, userForm, cardForm, userPopupOpenButton, cardPopupOpenButton, nameInput, jobInput, formValidators } from '../utils/constans.js';
+import { options, userForm, cardForm, userPopupOpenButton, cardPopupOpenButton, nameInput, jobInput, formValidators,userAvatarChangeButton,avatarChangeForm } from '../utils/constans.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -8,43 +8,33 @@ import UserInfo from '../components/UserInfo.js';
 import { createCard } from '../utils/utils.js';
 import { api } from '../components/Api.js';
 import './index.css';
-let cards
+
+let userId;
 
 Promise.all([api.getUserinfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
-    let userId;
     userId = userData._id;
     userInfo.setUserInfo(userData.name, userData.about)
-
-
-    cards = new Section({
-      items: cardsData,
-      renderer: (item) => {
-        const cardElement = createCard(item.name, item.link, item.owner._id, userId, item.likes, item._id, popupWithImage);
-        cards.addItem(cardElement);
-      }
-    }, ".elements");
-    cards.renderItems();
+   
+    cardsData.forEach(data => {
+      const cardElement = createCard(data.name, data.link, data.likes, data._id, userId, data.owner._id, popupWithImage ,confirmPopup);
+      cards.addItem(cardElement);
+    })
   })
 
-// Создаем экземпляр класса PopupWithImage
-const popupWithImage = new PopupWithImage('#popup_photo');
-popupWithImage.setEventListeners();
+  const popupWithImage = new PopupWithImage('#popup_photo');
+  popupWithImage.setEventListeners();
 
 //Создаем экземпляр класса UserInfo
 const userInfo = new UserInfo('.profile__user-name', '.profile__user-info');
 
 // //Создаем экземпляр класса Section,где в функции колбэке render создаем экземпляр класса Card для каждой карточки
-// const cards = new Section({
-//   items: initialCards,//создание нового экземпляра section ,который будет вставлять карточки
-//   renderer: (item) => {//колбэк где описываем как создавать карточки
-//     const cardElement = createCard(item.name,item.link,popupWithImage);
-//     cards.addItem(cardElement);
-//   }
-// }, ".elements");
+const cards = new Section({
+  items: [],
+}, ".elements");
 
-// //вставка карточек
-// cards.renderItems();
+//вставка карточек
+cards.renderItems();
 
 //Создаем экземпляр класса PopupWithForm для редактирования данных пользователя
 const popupWithUser = new PopupWithForm('#popup_edit-profile', {
@@ -62,10 +52,9 @@ popupWithUser.setEventListeners();
 //Создаем экземпляр класса PopupWithForm для формы добавления новых карточек
 const popupWitCard = new PopupWithForm('#popup_add-elements', {
   submitFormCallback: (item) => {
-    console.log(item)
     api.insertNewCard(item.place, item.link)
       .then(res => {
-        const cardElement = createCard(res.name, res.link, popupWithImage);
+        const cardElement = createCard(res.name, res.link, res.likes, res._id, userId, res.owner._id, popupWithImage ,confirmPopup);
         cards.addItem(cardElement);
       })
     popupWitCard.close();
@@ -74,6 +63,22 @@ const popupWitCard = new PopupWithForm('#popup_add-elements', {
 
 //вызов setEventListeners для формы добавления новых карточек
 popupWitCard.setEventListeners();
+
+const confirmPopup = new PopupWithForm('#popup_type_delete-card', {
+  submitFormCallback: () => {
+   api.deleteCard(id)
+  }
+});
+
+confirmPopup.setEventListeners();
+
+const editUserAvatarPopup = new PopupWithForm('#popup_edit-userAvatar', {
+  submitFormCallback: () => {
+   api.editAvatar(link)
+  }
+});
+
+editUserAvatarPopup.setEventListeners();
 
 // Включение валидации
 const enableValidation = (options) => {
@@ -102,6 +107,10 @@ cardPopupOpenButton.addEventListener('click', () => {
   formValidators[cardForm.getAttribute('id')].resetValidation()
 });
 
+userAvatarChangeButton.addEventListener('click', () => {
+  editUserAvatarPopup.open();
+  formValidators[avatarChangeForm.getAttribute('id')].resetValidation()
+});
 
 
 

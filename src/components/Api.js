@@ -43,9 +43,38 @@ class Api {
         link
       })
     })
-
   }
 
+  deleteCard(id) {
+    return this._customFetch(`${this._options.baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this._options.headers
+    })
+  }
+  
+  deleteCardLike(id) {
+    return this._customFetch(`${this._options.baseUrl}/cards/${id}/likes`, {
+      method: 'DELETE',
+      headers: this._options.headers
+    })
+  }
+
+  addCardLike(id) {
+    return this._customFetch(`${this._options.baseUrl}/cards/${id}/likes`, {
+      method: 'PUT',
+      headers: this._options.headers
+    })
+  }
+
+  editAvatar(link) {
+    return this._customFetch(`${this._options.baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._options.headers,
+      body: JSON.stringify({
+       avatar: link
+      })
+    })
+  }
 }
 
 
