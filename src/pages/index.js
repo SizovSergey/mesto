@@ -15,6 +15,7 @@ Promise.all([api.getUserinfo(), api.getInitialCards()])
   .then(([userData, cardsData]) => {
     userId = userData._id;
     userInfo.setUserInfo(userData.name, userData.about)
+    userInfo.setAvatarUser(userData.avatar)
    
     cardsData.forEach(data => {
       const cardElement = createCard(data.name, data.link, data.likes, data._id, userId, data.owner._id, popupWithImage ,confirmPopup);
@@ -76,8 +77,7 @@ const editUserAvatarPopup = new PopupWithForm('#popup_edit-userAvatar', {
   submitFormCallback: (item) => {
    api.editAvatar(item.link)
    .then(res => {
-    console.log(item.link)
-    userInfo.setAvataruser(res.avatar)
+    userInfo.setAvatarUser(res.avatar)
     editUserAvatarPopup.close()
    })
   }
@@ -114,7 +114,7 @@ cardPopupOpenButton.addEventListener('click', () => {
 
 userAvatarChangeButton.addEventListener('click', () => {
   editUserAvatarPopup.open();
-  userAvatar.src = userInfo.getUserInfo().avatar;
+ 
 });
 
 

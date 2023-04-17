@@ -19,7 +19,7 @@
     <section class="profile">
       <div class="profile__avatar-overlay">
         <img
-          src="#"
+          src="<%=require('./images/logo.svg')%>"
           alt="Аватар пользователя"
           class="profile__avatar"
         />
@@ -91,7 +91,7 @@
   <div class="popup" id="popup_edit-userAvatar">
     <div class="popup__container">
       <h3 class="popup__title">Обновить аватар</h3>
-      <form class="popup__form" id="popupForm_edit-profile" novalidate>
+      <form class="popup__form" id="popupForm_edit-userAvatar" novalidate>
         <label class="popup__input-container" for="userAvatar">
           <input type="url" class="popup__input" id="userAvatar" placeholder="Ссылка на картинку" name="link" required>
           <span id="userAvatar-error"></span>
