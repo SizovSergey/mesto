@@ -20,6 +20,7 @@ export const cardPopupOpenButton = document.querySelector('.profile__add-button'
 // Инпуты
 export const nameInput = userForm.querySelector("input[name='name']");
 export const jobInput = userForm.querySelector("input[name='job']");
+export const userAvatar = document.querySelector(".profile__avatar");
 
 export const formValidators = {};
 

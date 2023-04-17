@@ -1,4 +1,4 @@
-import { options, userForm, cardForm, userPopupOpenButton, cardPopupOpenButton, nameInput, jobInput, formValidators,userAvatarChangeButton,avatarChangeForm } from '../utils/constans.js';
+import { options, userForm, cardForm, userPopupOpenButton, cardPopupOpenButton, nameInput, jobInput, formValidators,userAvatarChangeButton,userAvatar } from '../utils/constans.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
@@ -26,7 +26,7 @@ Promise.all([api.getUserinfo(), api.getInitialCards()])
   popupWithImage.setEventListeners();
 
 //Создаем экземпляр класса UserInfo
-const userInfo = new UserInfo('.profile__user-name', '.profile__user-info');
+const userInfo = new UserInfo('.profile__user-name', '.profile__user-info', '.profile__avatar');
 
 // //Создаем экземпляр класса Section,где в функции колбэке render создаем экземпляр класса Card для каждой карточки
 const cards = new Section({
@@ -73,8 +73,13 @@ const confirmPopup = new PopupWithForm('#popup_type_delete-card', {
 confirmPopup.setEventListeners();
 
 const editUserAvatarPopup = new PopupWithForm('#popup_edit-userAvatar', {
-  submitFormCallback: () => {
-   api.editAvatar(link)
+  submitFormCallback: (item) => {
+    console.log(item)
+   api.editAvatar(item.link)
+   .then(res => {
+    userInfo.setAvataruser(res.avatar)
+    editUserAvatarPopup.close()
+   })
   }
 });
 
@@ -109,7 +114,7 @@ cardPopupOpenButton.addEventListener('click', () => {
 
 userAvatarChangeButton.addEventListener('click', () => {
   editUserAvatarPopup.open();
-  formValidators[avatarChangeForm.getAttribute('id')].resetValidation()
+  userAvatar.src = userInfo.getUserInfo().avatar;
 });
 
 
