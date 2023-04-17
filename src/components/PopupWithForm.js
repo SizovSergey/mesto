@@ -37,6 +37,10 @@ export default class PopupWithForm extends Popup {
 
   }
 
+  serButtontext(text) {
+    this._form.querySelector('.popup__submit-button').textContent = text;
+  }
+
   close() {
     super.close();
     this._form.reset();

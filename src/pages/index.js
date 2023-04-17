@@ -16,7 +16,7 @@ Promise.all([api.getUserinfo(), api.getInitialCards()])
     userId = userData._id;
     userInfo.setUserInfo(userData.name, userData.about)
     userInfo.setAvatarUser(userData.avatar)
-   
+
     cardsData.forEach(data => {
       const cardElement = createCard(data.name, data.link, data.likes, data._id, userId, data.owner._id, popupWithImage ,confirmPopup);
       cards.addItem(cardElement);
@@ -40,9 +40,11 @@ cards.renderItems();
 //Создаем экземпляр класса PopupWithForm для редактирования данных пользователя
 const popupWithUser = new PopupWithForm('#popup_edit-profile', {
   submitFormCallback: (data) => {
+    popupWithUser.serButtontext('Сохранение...');
     api.editProfile(data.name, data.job)
       .then((res) => {
         userInfo.setUserInfo(res.name, res.about);
+        popupWithUser.serButtontext('Сохранить');
       })
   }
 });
@@ -53,10 +55,12 @@ popupWithUser.setEventListeners();
 //Создаем экземпляр класса PopupWithForm для формы добавления новых карточек
 const popupWitCard = new PopupWithForm('#popup_add-elements', {
   submitFormCallback: (item) => {
+    popupWitCard.serButtontext('Сохранение...');
     api.insertNewCard(item.place, item.link)
       .then(res => {
         const cardElement = createCard(res.name, res.link, res.likes, res._id, userId, res.owner._id, popupWithImage ,confirmPopup);
         cards.addItem(cardElement);
+        popupWithUser.serButtontext('Создать');
       })
     popupWitCard.close();
   }
@@ -75,10 +79,12 @@ confirmPopup.setEventListeners();
 
 const editUserAvatarPopup = new PopupWithForm('#popup_edit-userAvatar', {
   submitFormCallback: (item) => {
+    editUserAvatarPopup.serButtontext('Сохранение...');
    api.editAvatar(item.link)
    .then(res => {
     userInfo.setAvatarUser(res.avatar)
     editUserAvatarPopup.close()
+    editUserAvatarPopup.serButtontext('Сохранить');
    })
   }
 });
@@ -114,7 +120,7 @@ cardPopupOpenButton.addEventListener('click', () => {
 
 userAvatarChangeButton.addEventListener('click', () => {
   editUserAvatarPopup.open();
- 
+
 });
 
 
