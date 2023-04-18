@@ -17,14 +17,14 @@
   </header>
   <main>
     <section class="profile">
-      <div class="profile__avatar-overlay">
+      <div class="profile__avatar-container">
         <img
-          src="#"
-          alt="Аватар пользователя"
-          class="profile__avatar"
+            src="#"
+            alt="Аватар пользователя"
+            class="profile__avatar"
         />
         <button class="profile__avatar-change-button"></button>
-      </div>
+    </div>
       <div class="profile__container">
         <h1 class="profile__user-name"></h1>
         <p class="profile__user-info"></p>
@@ -79,17 +79,17 @@
   </div>
 
   <div class="popup" id="popup_type_delete-card">
-    <div class="popup__container">
+    <div class="popup__container popup__container_type-delete">
       <h3 class="popup__title">Вы уверены?</h3>
       <form class="popup__form" id="popupForm_delete-card" novalidate>
-        <button class="popup__submit-button" type="submit">Да</button>
+        <button class="popup__submit-button popup__submit-button_type-deletePopup" type="submit">Да</button>
       </form>
       <button class="popup__cancel-button" type="button" aria-label="Закрыть окно"></button>
     </div>
   </div>
 
   <div class="popup" id="popup_edit-userAvatar">
-    <div class="popup__container">
+    <div class="popup__container popup__container_type-userAvatar">
       <h3 class="popup__title">Обновить аватар</h3>
       <form class="popup__form" id="popupForm_edit-userAvatar" novalidate>
         <label class="popup__input-container" for="userAvatar">
@@ -115,8 +115,10 @@
       <button class="element__button-remove" type="button" aria-label="Удалить карточку с картинкой"></button>
       <div class="element__content">
         <h2 class="element__title"></h2>
+        <div class="element__like-container">
         <button class="element__button-like" type="button" aria-label="Поставить лайк"></button>
         <span class="element__like-count"></span>
+      </div>
       </div>
     </div>
   </template>

@@ -4,7 +4,6 @@ import { api } from '../components/Api.js';
 
 
 const createCard = (name, link, likes, _id, userId, ownerId, popupWithImage, confirmPopup) => {
-  console.log(likes)
   const card = new Card({
     name: name,
     link: link,
@@ -17,25 +16,28 @@ const createCard = (name, link, likes, _id, userId, ownerId, popupWithImage, con
     },
     handleDeleteClick: (_id) => {
       confirmPopup.open()
-      confirmPopup.changeSubmitFormCallback(() => {
+      confirmPopup.updateSubmitFormConfirmation(() => {
         api.deleteCard(_id)
           .then(res => {
             card.removeElement();
-            confirmPopup.close();
+            confirmPopup.close()
           })
+          .catch((err) => console.log(`Удаление завершилось ошибкой: ${err}`))
       })
     },
     handlelikeClick: () => {
-     if(card.isLiked()){
-     api.deleteCardLike(_id)
-        .then(res => {
-          card.setLikes(res.likes)
-        })
+      if (card.isLiked()) {
+        api.deleteCardLike(_id)
+          .then(res => {
+            card.setLikes(res.likes)
+          })
+          .catch((err) => console.log(`Удаление лайка завершилось ошибкой: ${err}`))
       } else {
-      api.addCardLike(_id)
-        .then(res => {
-          card.setLikes(res.likes)
-        })
+        api.addCardLike(_id)
+          .then(res => {
+            card.setLikes(res.likes)
+          })
+          .catch((err) => console.log(`Поставить лайк не удалось - ошибка: ${err}`))
       }
     }
   }, '#element-template');

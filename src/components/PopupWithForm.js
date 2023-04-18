@@ -13,7 +13,6 @@ export default class PopupWithForm extends Popup {
     super.open();
   }
 
-
   _getInputValues() {
     this._inputsValues = {};
     this._inputs.forEach((input) => {
@@ -22,23 +21,16 @@ export default class PopupWithForm extends Popup {
     return this._inputsValues;
   }
 
-  changeSubmitFormCallback(newSubmitFormCallback) {
-    this._submitFormCallback = newSubmitFormCallback;
+  setButtontext(text) {
+    this._form.querySelector('.popup__submit-button').textContent = text;
   }
-
 
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
       this._submitFormCallback(this._getInputValues());
-      this.close();
     });
-
-  }
-
-  serButtontext(text) {
-    this._form.querySelector('.popup__submit-button').textContent = text;
   }
 
   close() {

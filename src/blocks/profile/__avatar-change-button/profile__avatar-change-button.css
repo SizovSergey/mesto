@@ -1,24 +1,24 @@
 .profile__avatar-change-button {
-    width: 100%;
-    height: 100%;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0; 
+    width: 120px;
+    height: 120px;
+    background-color: #000;
+    opacity: 0;
+    outline: none;
     border: none;
     border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: background-color .7s ease;
-    outline: none;
-  }
-  
-  .profile__avatar-change:hover {
-    background-color: rgba(0, 0, 0, .8);
-    background-image: url('../../../images/edit_profileAvatar.svg');
-    background-size: 26px 26px;
-    background-repeat: no-repeat;
-    background-position: center;
     cursor: pointer;
-  }
+    background-image: url(../../../images/edit_profileAvatar.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 1s linear;
+    z-index: 2;
+}
+
+.profile__avatar-change-button:hover {
+    opacity: .8;
+}
