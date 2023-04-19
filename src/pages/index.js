@@ -20,8 +20,8 @@ Promise.all([api.getUserinfo(), api.getInitialCards()])
     userInfo.setUserInfo(userData.name, userData.about)
     userInfo.setAvatarUser(userData.avatar)
     //Забираем полученные из Api карточки в item класса section
-    cards.setItems(cardsData);
-    cards.renderItems();
+
+    section.renderItems(cardsData);
   })
   .catch((err) => console.log(`Загрузка карточек и информации о пользователе невозможна: ${err}`));
 
@@ -32,11 +32,11 @@ const popupWithImage = new PopupWithImage('#popup_photo');
 const userInfo = new UserInfo('.profile__user-name', '.profile__user-info', '.profile__avatar');
 
 //инстанс класса класса Section,где в функции колбэке render создаем экземпляр класса Card для каждой карточки
-const cards = new Section({
+const section = new Section({
   items: [],
   renderer: (data) => {
     const cardElement = createCard(data.name, data.link, data.likes, data._id, userId, data.owner._id, popupWithImage, confirmPopup);
-    cards.addItem(cardElement);
+    section.addItem(cardElement);
   }
 }, ".elements");
 
@@ -63,7 +63,7 @@ const popupWitCard = new PopupWithForm('#popup_add-elements', {
     api.insertNewCard(item.place, item.link)
       .then(res => {
         const cardElement = createCard(res.name, res.link, res.likes, res._id, userId, res.owner._id, popupWithImage, confirmPopup);
-        cards.addItem(cardElement);
+        section.addItem(cardElement);
         popupWitCard.close()
       })
       .catch((err) => console.log(`Добавление нового места завершилось ошибкой: ${err}`))

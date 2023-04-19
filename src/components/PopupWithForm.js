@@ -7,10 +7,7 @@ export default class PopupWithForm extends Popup {
     this._popup = document.querySelector(popupSelector);
     this._form = this._popup.querySelector('.popup__form');
     this._inputs = Array.from(this._form.querySelectorAll('.popup__input'));
-  }
-
-  open() {
-    super.open();
+    this._submitBtn = this._form.querySelector('.popup__submit-button');
   }
 
   _getInputValues() {
@@ -22,7 +19,7 @@ export default class PopupWithForm extends Popup {
   }
 
   setButtontext(text) {
-    this._form.querySelector('.popup__submit-button').textContent = text;
+    this._submitBtn.textContent = text;
   }
 
   setEventListeners() {

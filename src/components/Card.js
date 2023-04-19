@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ name, link, likes,cardId, ownerId, userId, handleCardClick, handleDeleteClick,handlelikeClick }, templateSelector) {
+  constructor({ name, link, likes, cardId, ownerId, userId, handleCardClick, handleDeleteClick, handlelikeClick }, templateSelector) {
     this._name = name;
     this._link = link;
     this._likes = likes;
@@ -27,11 +27,12 @@ export default class Card {
     this._cardTitle = this._card.querySelector('.element__title');
     this._cardBtnLike = this._card.querySelector('.element__button-like');
     this._cardBtnRemove = this._card.querySelector('.element__button-remove');
+    this.likeCountElement = this._card.querySelector('.element__like-count');
     this._setEventListeners();
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardTitle.textContent = this._name;
-    if (this.ownerId !== this._userId){
+    if (this.ownerId !== this._userId) {
       this._cardBtnRemove.style.display = 'none';
     }
     this.setLikes(this._likes);
@@ -43,27 +44,25 @@ export default class Card {
   }
 
   _deletelike() {
-    this._cardBtnLike.classList.remove('element__button-like_active'); 
+    this._cardBtnLike.classList.remove('element__button-like_active');
   }
 
-  isLiked() {
-    const likedCard = this._likes.find(user => user._id == this._userId)
-    return likedCard
-  }
+  isLiked() { 
+    return this._likes.some(user => user._id === this._userId); 
+}
 
   setLikes(newLikes) {
     this._likes = newLikes;
-    this.likeCountElement = this._card.querySelector('.element__like-count');
     this.likeCountElement.textContent = this._likes.length;
-    if (this.isLiked()){
+    if (this.isLiked()) {
       this._addlike();
-     } else {
+    } else {
       this._deletelike();
-     }
+    }
   }
 
   removeElement() {
-    this._card.remove(); 
+    this._card.remove();
     this._card = null;
   }
 
