@@ -16,7 +16,7 @@
 .element{background:#fff;border-radius:10px;box-shadow:0 0 25px rgba(0,0,0,.15);display:block;margin:0;max-width:282px;min-height:361px;overflow:hidden;position:relative}
 .element__button-like{background-color:#fff;background-image:url(e3b9ba5840ebe97bc077.svg);background-position:50%;background-repeat:no-repeat;background-size:contain;border:none;cursor:pointer;min-height:19px;min-width:22px;transition:opacity .2s ease}.element__button-like:hover{opacity:.5}
 .element__button-like_active{background-image:url(35948469632d0421d697.svg)}
-.element__content{align-items:baseline;align-items:center;display:flex;flex-direction:row;justify-content:space-between;margin:23px 15px 24px 21px;max-width:246px}
+.element__content{align-items:center;display:flex;flex-direction:row;justify-content:space-between;margin:23px 15px 24px 21px;max-width:246px}
 .element__image{cursor:pointer;height:282px;max-width:282px;-o-object-fit:cover;object-fit:cover;width:100%}
 .element__title{color:#000;font-family:Inter,Arial,sans-serif;font-size:24px;font-style:normal;font-weight:900;line-height:1.21;margin:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .element__like-container{display:flex;flex-direction:column;padding-top:3px}
