@@ -39,11 +39,11 @@ export default class Card {
   }
 
   _addlike() {
-    this._cardBtnLike.classList.add('element__button-like_active'); // лайк елементов
+    this._cardBtnLike.classList.add('element__button-like_active');
   }
 
   _deletelike() {
-    this._cardBtnLike.classList.remove('element__button-like_active'); // лайк елементов
+    this._cardBtnLike.classList.remove('element__button-like_active'); 
   }
 
   isLiked() {
@@ -63,7 +63,7 @@ export default class Card {
   }
 
   removeElement() {
-    this._card.remove(); // удаление элементов
+    this._card.remove(); 
     this._card = null;
   }
 

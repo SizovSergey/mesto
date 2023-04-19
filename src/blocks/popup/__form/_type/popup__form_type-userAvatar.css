@@ -1,0 +1,5 @@
+@media screen and (max-width: 768px) {
+    .popup__form_type-userAvatar {
+      margin-top: 50px;
+    }
+  }

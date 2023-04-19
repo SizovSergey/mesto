@@ -16,7 +16,7 @@
     background-position: center;
     background-repeat: no-repeat;
     transition: opacity 1s linear;
-    z-index: 2;
+
 }
 
 .profile__avatar-change-button:hover {

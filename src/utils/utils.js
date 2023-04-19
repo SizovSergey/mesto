@@ -2,7 +2,7 @@ import Card from '../components/Card.js';
 import { api } from '../components/Api.js';
 
 
-
+//Функция создает ,которая создает новую карточку
 const createCard = (name, link, likes, _id, userId, ownerId, popupWithImage, confirmPopup) => {
   const card = new Card({
     name: name,
